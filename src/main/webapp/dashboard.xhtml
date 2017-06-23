@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<head>
+<meta charset="UTF-8" />
+<title>Sprint Management Console</title>
+</head>
+<body>
+	<h2>Welcome Application</h2>
+
+	<h:form>
+		<h:commandButton action="#{seedLevelBean.getAllLevels}" value="Levels">
+		</h:commandButton>
+		<h:commandButton action="#{seedRoleBean.getAllRoles}" value="Roles">
+		</h:commandButton>
+		<h:commandButton action="level.xhtml" value="Add Roles">
+		</h:commandButton>
+	</h:form>
+</body>
+</html>

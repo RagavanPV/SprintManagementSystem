@@ -7,6 +7,10 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/tx/spring-util-4.3.xsd">
 
+
+	<context:component-scan base-package="com.ragavan.sprint.data" />
+	<context:component-scan base-package="com.ragavan.sprint.mbeans" />
+
 	<bean id="mySQLdataSource" class="org.apache.commons.dbcp2.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
@@ -19,6 +23,7 @@
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="mySQLdataSource" />
+		<property name="packagesToScan" value="com.ragavan.sprint.domains" />
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>

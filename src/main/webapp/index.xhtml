@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html">
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <head>
 <meta charset="UTF-8" />
 <title>Sprint Management Console</title>
+<script src="js/md5.js"></script>
 </head>
 <body>
 	<h2>Welcome Application</h2>
-	<h:outputText
-		value="This is the Sprint Management System">
-		</h:outputText>
+	<h:outputText value="This is the Sprint Management System">
+	</h:outputText>
+	<h:panelGroup>
+		<h:form>
+			<h:outputText value="Email_id"></h:outputText>
+			<h:inputText value="#{loginBean.email}"></h:inputText>
+			<h:outputText value="Password"></h:outputText>
+			<h:inputSecret value="#{loginBean.password}"></h:inputSecret>
+			<h:commandButton action="#{loginBean.login}" value="Login">
+			</h:commandButton>
+		</h:form>
+	</h:panelGroup>
 </body>
 </html>
