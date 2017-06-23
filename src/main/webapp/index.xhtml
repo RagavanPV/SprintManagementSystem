@@ -15,9 +15,9 @@
 	<h:panelGroup>
 		<h:form>
 			<h:outputText value="Email_id"></h:outputText>
-			<h:inputText value="#{loginBean.email}"></h:inputText>
+			<h:inputText required="true" requiredMessage="Please enter the email" value="#{loginBean.email}"></h:inputText>
 			<h:outputText value="Password"></h:outputText>
-			<h:inputSecret value="#{loginBean.password}"></h:inputSecret>
+			<h:inputSecret required="true" value="#{loginBean.password}"></h:inputSecret>
 			<h:commandButton action="#{loginBean.login}" value="Login">
 			</h:commandButton>
 		</h:form>

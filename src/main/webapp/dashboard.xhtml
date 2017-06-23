@@ -8,9 +8,11 @@
 <title>Sprint Management Console</title>
 </head>
 <body>
-	<h2>Welcome Application</h2>
+	<h2>Welcome,#{userSession.name}</h2>
+
 
 	<h:form>
+		<h:commandLink value="Logout" action="#{loginBean.logout}"></h:commandLink>
 		<h:commandButton action="#{seedLevelBean.getAllLevels}" value="Levels">
 		</h:commandButton>
 		<h:commandButton action="#{seedRoleBean.getAllRoles}" value="Roles">

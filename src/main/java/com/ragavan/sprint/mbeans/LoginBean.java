@@ -1,6 +1,8 @@
 package com.ragavan.sprint.mbeans;
 
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -40,6 +42,9 @@ public class LoginBean {
 		try {
 			u = user.retrieveUserByEmail(getEmail());
 			if (u.getPassword().equals(getPassword())) {
+				FacesContext context = FacesContext.getCurrentInstance();
+				HttpSession session = (HttpSession) context.getExternalContext().getSession(true);
+				session.setAttribute("userSession", u);
 				url = "dashboard?faces-redirect=true";
 			}
 		} catch (DataAccessException e) {
@@ -47,5 +52,13 @@ public class LoginBean {
 		}
 
 		return url;
+	}
+	public String logout(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) context.getExternalContext().getSession(true);
+		if(session.getAttribute("userSession")!=null){
+			session.invalidate();
+		}
+		return "index?faces-redirect=true";
 	}
 }

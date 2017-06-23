@@ -65,7 +65,7 @@ public class SeedLevelBean {
 
 	public String deleteLevel() {
 
-		boolean result = levelDAO.deleteSeedLevel(getId());
+		boolean result = levelDAO.deleteSeedLevelById(getId());
 		return "index";
 	}
 
@@ -74,7 +74,7 @@ public class SeedLevelBean {
 		level.setCode(getCode());
 		level.setName(getName());
 		level.setId(getId());
-		boolean result = levelDAO.updateSeedLevel(level);
+		boolean result = levelDAO.updateSeedLevelById(level);
 		return "index";
 	}
 

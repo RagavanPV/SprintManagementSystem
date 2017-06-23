@@ -5,9 +5,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -30,6 +33,12 @@ public class Sprint implements Serializable {
 
 	@Column(name = "end_date")
 	private Date endDate;
+	@Column(name = "expected_end_date")
+	private Date expectedEndDate;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "type_id")
+	private Date typeId;
 
 	/****************** Getters and Setters *******************/
 	public int getId() {
@@ -70,6 +79,22 @@ public class Sprint implements Serializable {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	public Date getExpectedEndDate() {
+		return expectedEndDate;
+	}
+
+	public void setExpectedEndDate(Date expectedEndDate) {
+		this.expectedEndDate = expectedEndDate;
+	}
+
+	public Date getTypeId() {
+		return typeId;
+	}
+
+	public void setTypeId(Date typeId) {
+		this.typeId = typeId;
 	}
 
 }

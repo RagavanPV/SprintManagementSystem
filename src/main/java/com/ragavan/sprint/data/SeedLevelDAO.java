@@ -46,7 +46,7 @@ public class SeedLevelDAO {
 		return result;
 	}
 
-	public boolean updateSeedLevel(SeedLevel seedLevel) {
+	public boolean updateSeedLevelById(SeedLevel seedLevel) {
 		boolean result = false;
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
@@ -65,7 +65,7 @@ public class SeedLevelDAO {
 		return result;
 	}
 
-	public boolean deleteSeedLevel(int id) {
+	public boolean deleteSeedLevelById(int id) {
 		boolean result = false;
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();

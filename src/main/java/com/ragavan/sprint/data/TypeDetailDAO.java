@@ -17,12 +17,24 @@ public class TypeDetailDAO {
 	@Autowired
 	SessionFactory sessionFactory;
 
-	public List<TypeDetail> retrieveAllSeedLevels() {
+	public List<TypeDetail> retrieveAllTypeDetails() {
 		List<TypeDetail> typeDetail = null;
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		Query<TypeDetail> query = session.createQuery("from TypeDetail", TypeDetail.class);
 		typeDetail = query.list();
+		transaction.commit();
+		session.close();
+		return typeDetail;
+	}
+
+	public TypeDetail retrieveTypeDetailById(int id) {
+		TypeDetail typeDetail = null;
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query<TypeDetail> query = session.createQuery("from TypeDetail where id=:id", TypeDetail.class);
+		query.setParameter("id", id);
+		typeDetail = query.getSingleResult();
 		transaction.commit();
 		session.close();
 		return typeDetail;

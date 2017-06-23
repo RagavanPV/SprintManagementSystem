@@ -16,7 +16,7 @@ public class SprintTaskDAO {
 	@Autowired
 	SessionFactory sessionFactory;
 
-	public List<SprintTask> retrieveAllSeedLevels() {
+	public List<SprintTask> retrieveAllSprintTasks() {
 		List<SprintTask> sprintTask = null;
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
@@ -26,4 +26,34 @@ public class SprintTaskDAO {
 		session.close();
 		return sprintTask;
 	}
+
+	public SprintTask retrieveSprintTaskById(int id) {
+		SprintTask sprintTask = null;
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query<SprintTask> query = session.createQuery("from SprintTask where id=:id", SprintTask.class);
+		query.setParameter("id", id);
+		sprintTask = query.getSingleResult();
+		transaction.commit();
+		session.close();
+		return sprintTask;
+	}
+	public boolean deleteSprintTask(int id) {
+		boolean result = false;
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery("delete from SprintTask where id=:id");
+		query.setParameter("id", id);
+		int rows = query.executeUpdate();
+		transaction.commit();
+		session.close();
+		if (rows > 0) {
+			result = true;
+		} else {
+			result = false;
+		}
+		return result;
+	}
+	
+	
 }

@@ -16,12 +16,24 @@ public class TypeDAO {
 	@Autowired
 	SessionFactory sessionFactory;
 
-	public List<Type> retrieveAllSeedLevels() {
+	public List<Type> retrieveAllTypes() {
 		List<Type> types = null;
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		Query<Type> query = session.createQuery("from Type", Type.class);
 		types = query.list();
+		transaction.commit();
+		session.close();
+		return types;
+	}
+
+	public Type retrieveTypeById(int id) {
+		Type types = null;
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query<Type> query = session.createQuery("from Type where id=:id", Type.class);
+		query.setParameter("id", id);
+		types = query.getSingleResult();
 		transaction.commit();
 		session.close();
 		return types;
