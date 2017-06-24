@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<head>
+<meta charset="UTF-8" />
+<title>Sprint Management Console</title>
+</head>
+<body>
+	<ui:include src="header.xhtml"></ui:include>
+
+	<h:form>
+		<h:outputLabel value="Code:"></h:outputLabel>
+		<h:inputText value="#{epicBean.code}"></h:inputText>
+		<h:outputLabel value="Name:"></h:outputLabel>
+		<h:inputText value="#{epicBean.name}"></h:inputText>
+		<h:outputLabel value="Start Date"></h:outputLabel>
+		<h:inputText a:type="date" value="#{epicBean.startDate}">
+			<f:convertDateTime pattern="yyyy-MM-dd" />
+		</h:inputText>
+		<h:outputLabel value="Expected End Date"></h:outputLabel>
+		<h:inputText a:type="date" value="#{epicBean.expectedEndDate}">
+			<f:convertDateTime pattern="yyyy-MM-dd" />
+		</h:inputText>
+		<h:outputLabel value="Sprints"></h:outputLabel>
+		<h:selectOneMenu value="#{epicBean.sprintId}">
+			<f:selectItems value="#{epicBean.sprints}" var="sprint" itemLabel="#{sprint.name}" itemValue="#{sprint.id}" />
+		</h:selectOneMenu>
+		<h:commandButton action="#{epicBean.addEpic}" value="Submit"></h:commandButton>
+	</h:form>
+
+
+</body>
+</html>

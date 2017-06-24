@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ragavan.sprint.domains.Epic;
+import com.ragavan.sprint.domains.Sprint;
 
 @Repository
 public class EpicDAO {
@@ -71,6 +72,30 @@ public class EpicDAO {
 		Transaction transaction = session.beginTransaction();
 		Query query = session.createQuery("delete from Epic where id=:id");
 		query.setParameter("id", id);
+		int rows = query.executeUpdate();
+		transaction.commit();
+		session.close();
+		if (rows > 0) {
+			result = true;
+		} else {
+			result = false;
+		}
+		return result;
+	}
+	public boolean addEpics(Epic epic) {
+		boolean result = false;
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createSQLQuery(
+				"INSERT INTO epics(CODE,NAME,START_DATE,EXPECTED_END_DATE,SPRINT_ID) VALUES(:code,:name,:startDate,:expectedEndDate,:sprintId)");
+		query.setParameter("code", epic.getCode());
+		query.setParameter("name", epic.getName());
+		java.sql.Date sqlstartDate = new java.sql.Date(epic.getStartDate().getTime());
+		query.setParameter("startDate", sqlstartDate);
+		java.sql.Date sqlEndDate = new java.sql.Date(epic.getExpectedEndDate().getTime());
+		query.setParameter("expectedEndDate", sqlEndDate);
+		query.setParameter("sprintId", epic.getSprintId().getId());
+
 		int rows = query.executeUpdate();
 		transaction.commit();
 		session.close();

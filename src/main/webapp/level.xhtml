@@ -8,26 +8,19 @@
 <title>Sprint Management Console</title>
 </head>
 <body>
+	<ui:include src="header.xhtml"></ui:include>
+
 	<h2>Welcome Application</h2>
 	<h:form>
 	<h:outputLabel value="Code:"></h:outputLabel>
 	<h:inputText value="#{seedLevelBean.code}"></h:inputText>
 	<h:outputLabel value="Name:"></h:outputLabel>
 	<h:inputText value="#{seedLevelBean.name}"></h:inputText>
-	<h:outputLabel value="Id:"></h:outputLabel>
-	<h:inputText value="#{seedLevelBean.id}"></h:inputText>
 	<h:commandButton action="#{seedLevelBean.addLevel}"
 			value="Submit">
 			</h:commandButton>
 	</h:form>
-	<h:form>
 	
-	<h:outputLabel value="Id:"></h:outputLabel>
-	<h:inputText value="#{seedLevelBean.id}"></h:inputText>
-	<h:commandButton action="#{seedLevelBean.deleteLevel}"
-			value="Submit">
-			</h:commandButton>
-	</h:form>
 
 </body>
 </html>

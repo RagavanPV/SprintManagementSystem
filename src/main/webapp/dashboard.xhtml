@@ -6,19 +6,16 @@
 <head>
 <meta charset="UTF-8" />
 <title>Sprint Management Console</title>
+
 </head>
 <body>
-	<h2>Welcome,#{userSession.name}</h2>
-
+	<ui:include src="header.xhtml"></ui:include>
 
 	<h:form>
-		<h:commandLink value="Logout" action="#{loginBean.logout}"></h:commandLink>
-		<h:commandButton action="#{seedLevelBean.getAllLevels}" value="Levels">
-		</h:commandButton>
-		<h:commandButton action="#{seedRoleBean.getAllRoles}" value="Roles">
-		</h:commandButton>
-		<h:commandButton action="level.xhtml" value="Add Roles">
-		</h:commandButton>
+		<h:commandButton action="level.xhtml" value="Add Levels"></h:commandButton>
+		<h:commandButton action="sprint.xhtml" value="Create New Sprint"></h:commandButton>
+		<h:commandButton action="epic.xhtml" value="Create New Epic"></h:commandButton>
+		<h:commandButton action="task.xhtml" value="Create New Task"></h:commandButton>
 	</h:form>
 </body>
 </html>

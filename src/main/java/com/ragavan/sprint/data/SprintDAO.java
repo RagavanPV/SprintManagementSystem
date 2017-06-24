@@ -50,8 +50,10 @@ public class SprintDAO {
 		query.setParameter("n", sprint.getName());
 		query.setParameter("startDate", sprint.getStartDate());
 		query.setParameter("endDate", sprint.getEndDate());
-		query.setParameter("expEndDate", sprint.getExpectedEndDate());
-		query.setParameter("typeId", sprint.getTypeId());
+		/*
+		 * query.setParameter("expEndDate", sprint.getExpectedEndDate());
+		 * query.setParameter("typeId", sprint.getTypeId());
+		 */
 		query.setParameter("id", sprint.getId());
 		int rows = query.executeUpdate();
 		transaction.commit();
@@ -70,6 +72,27 @@ public class SprintDAO {
 		Transaction transaction = session.beginTransaction();
 		Query query = session.createQuery("delete from Sprint where id=:id");
 		query.setParameter("id", id);
+		int rows = query.executeUpdate();
+		transaction.commit();
+		session.close();
+		if (rows > 0) {
+			result = true;
+		} else {
+			result = false;
+		}
+		return result;
+	}
+
+	public boolean addSprint(Sprint sprint) {
+		boolean result = false;
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createSQLQuery(
+				"INSERT INTO sprints(CODE,NAME,END_DATE) VALUES(:code,:name,:endDate)");
+		query.setParameter("code", sprint.getCode());
+		query.setParameter("name", sprint.getName());
+		java.sql.Date sqlEndDate = new java.sql.Date(sprint.getEndDate().getTime());
+		query.setParameter("endDate", sqlEndDate);
 		int rows = query.executeUpdate();
 		transaction.commit();
 		session.close();

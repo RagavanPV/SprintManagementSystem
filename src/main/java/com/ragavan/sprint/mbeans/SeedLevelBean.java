@@ -60,7 +60,7 @@ public class SeedLevelBean {
 		level.setId(id);
 		System.out.println(level.getCode() + " " + level.getName());
 		boolean result = levelDAO.addSeedLevel(level);
-		return "index";
+		return "dashboard";
 	}
 
 	public String deleteLevel() {

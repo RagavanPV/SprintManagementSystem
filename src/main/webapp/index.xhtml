@@ -6,21 +6,46 @@
 <head>
 <meta charset="UTF-8" />
 <title>Sprint Management Console</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous" />
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
 <script src="js/md5.js"></script>
 </head>
 <body>
-	<h2>Welcome Application</h2>
-	<h:outputText value="This is the Sprint Management System">
-	</h:outputText>
-	<h:panelGroup>
-		<h:form>
-			<h:outputText value="Email_id"></h:outputText>
-			<h:inputText required="true" requiredMessage="Please enter the email" value="#{loginBean.email}"></h:inputText>
-			<h:outputText value="Password"></h:outputText>
-			<h:inputSecret required="true" value="#{loginBean.password}"></h:inputSecret>
-			<h:commandButton action="#{loginBean.login}" value="Login">
-			</h:commandButton>
-		</h:form>
-	</h:panelGroup>
+	<h2>Welcome to Sprint Management System</h2>
+	<div class="container-fluid col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Login</h3>
+			</div>
+			<div class="panel-body">
+				<h:form>
+					<div class="form-group">
+						<label for="exampleInputEmail1">Email address</label>
+						<h:inputText styleClass="form-control" required="true"
+							requiredMessage="Please enter the email"
+							value="#{loginBean.email}"></h:inputText>
+					</div>
+					<div class="form-group">
+						<label for="exampleInputPassword1">Password</label>
+						<h:inputSecret styleClass="form-control" required="true"
+							value="#{loginBean.password}"></h:inputSecret>
+					</div>
+					<h:commandButton styleClass="btn btn-default"
+						action="#{loginBean.login}" value="Login">
+					</h:commandButton>
+				</h:form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

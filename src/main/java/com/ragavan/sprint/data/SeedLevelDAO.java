@@ -29,22 +29,22 @@ public class SeedLevelDAO {
 	}
 
 	public boolean addSeedLevel(SeedLevel seedLevel) {
-		boolean result = false;
-		Session session = sessionFactory.openSession();
-		Transaction transaction=session.beginTransaction();
-		Query query = session.createQuery("INSERT INTO SeedLevel(CODE,NAME) VALUES(':code',':name')");
-		query.setParameter("code", seedLevel.getCode());
-		query.setParameter("name", seedLevel.getName());
-		int rows = query.executeUpdate();
-		transaction.commit();
-		session.close();
-		if (rows > 0) {
-			result = true;
-		} else {
-			result = false;
-		}
-		return result;
-	}
+        boolean result = false;
+        Session session = sessionFactory.openSession();
+        Transaction transaction=session.beginTransaction();
+        Query query = session.createSQLQuery("INSERT INTO seed_levels(CODE,NAME) VALUES(:code,:name)");
+        query.setParameter("code", seedLevel.getCode());
+        query.setParameter("name", seedLevel.getName());
+        int rows = query.executeUpdate();
+        transaction.commit();
+        session.close();
+        if (rows > 0) {
+            result = true;
+        } else {
+            result = false;
+        }
+        return result;
+    }
 
 	public boolean updateSeedLevelById(SeedLevel seedLevel) {
 		boolean result = false;

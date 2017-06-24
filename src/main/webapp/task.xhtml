@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<head>
+<meta charset="UTF-8" />
+<title>Sprint Management Console</title>
+</head>
+<body>
+	<ui:include src="header.xhtml"></ui:include>
+
+	<h:form>
+
+		<h:outputLabel value="Name:"></h:outputLabel>
+		<h:inputText value="#{taskBean.tasks.name}"></h:inputText>
+		<h:outputLabel value="Description"></h:outputLabel>
+		<h:inputTextarea value="#{taskBean.tasks.code}"></h:inputTextarea>
+		<h:outputLabel value="Start Date"></h:outputLabel>
+		<h:inputText a:type="date" value="#{taskBean.tasks.startDate}">
+			<f:convertDateTime pattern="yyyy-MM-dd" />
+		</h:inputText>
+		<h:outputLabel value="Expected End Date"></h:outputLabel>
+		<h:inputText a:type="date" value="#{taskBean.tasks.expectedEndDate}">
+			<f:convertDateTime pattern="yyyy-MM-dd" />
+		</h:inputText>
+		<h:outputLabel value="Types"></h:outputLabel>
+		<h:selectOneMenu value="#{taskBean.tasks.typeId}">
+			<f:selectItems value="#{taskBean.types}" var="type"
+				itemLabel="#{type.name}" itemValue="#{type.id}" />
+		</h:selectOneMenu>
+		<h:outputLabel value="Roles"></h:outputLabel>
+		<h:selectOneMenu value="#{taskBean.tasks.roleId}">
+			<f:selectItems value="#{taskBean.roles}" var="role"
+				itemLabel="#{role.name}" itemValue="#{role.id}" />
+		</h:selectOneMenu>
+		<h:outputLabel value="Epics"></h:outputLabel>
+		<h:selectOneMenu value="#{taskBean.tasks.epicId}">
+			<f:selectItems value="#{taskBean.epics}" var="epic"
+				itemLabel="#{epic.name}" itemValue="#{epic.id}" />
+		</h:selectOneMenu>
+		<h:commandButton action="#{taskBean.addTask}" value="Submit"></h:commandButton>
+	</h:form>
+
+
+</body>
+</html>

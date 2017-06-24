@@ -8,9 +8,9 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="src" path="src/test/java"/>
-	<classpathentry path="bin" kind="output"/>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry path="bin" kind="output"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/"/>
 	<classpathentry sourcepath="C:/Users/Admin/.gradle/caches/modules-2/files-2.1/mysql/mysql-connector-java/6.0.6/db709b9df634cc45886828ce72b271662b4915db/mysql-connector-java-6.0.6-sources.jar" kind="lib" path="C:/Users/Admin/.gradle/caches/modules-2/files-2.1/mysql/mysql-connector-java/6.0.6/1d19b184dbc596008cc71c83596f051c3ec4097f/mysql-connector-java-6.0.6.jar">
 		<attributes>
