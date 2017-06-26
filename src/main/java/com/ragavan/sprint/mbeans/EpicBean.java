@@ -106,13 +106,12 @@ public class EpicBean {
 	}
 
 	@PostConstruct
-	private void init() {
+	public void init() {
 		getAllSprints();
 	}
 
-	private void getAllSprints() {
+	public void getAllSprints() {
 		sprints = sprintDAO.retrieveAllSprints();
-		System.out.println(sprints.get(0).getName());
 	}
 
 	public String addEpic() {

@@ -1,5 +1,6 @@
 package com.ragavan.sprint.mbeans;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -38,7 +39,7 @@ public class LoginBean {
 
 	public String login() {
 		User u;
-		String url="index?faces-redirect=true";
+		String url = "index?faces-redirect=true";
 		try {
 			u = user.retrieveUserByEmail(getEmail());
 			if (u.getPassword().equals(getPassword())) {
@@ -50,13 +51,16 @@ public class LoginBean {
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
-
+		String errorMessage = "Invalid Login";
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, errorMessage);
+		FacesContext.getCurrentInstance().addMessage("form:email", message);
 		return url;
 	}
-	public String logout(){
+
+	public String logout() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) context.getExternalContext().getSession(true);
-		if(session.getAttribute("userSession")!=null){
+		if (session.getAttribute("userSession") != null) {
 			session.invalidate();
 		}
 		return "index?faces-redirect=true";

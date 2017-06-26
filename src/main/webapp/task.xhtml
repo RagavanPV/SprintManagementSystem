@@ -14,29 +14,29 @@
 	<h:form>
 
 		<h:outputLabel value="Name:"></h:outputLabel>
-		<h:inputText value="#{taskBean.tasks.name}"></h:inputText>
+		<h:inputText value="#{taskBean.name}"></h:inputText>
 		<h:outputLabel value="Description"></h:outputLabel>
-		<h:inputTextarea value="#{taskBean.tasks.code}"></h:inputTextarea>
+		<h:inputTextarea value="#{taskBean.description}"></h:inputTextarea>
 		<h:outputLabel value="Start Date"></h:outputLabel>
-		<h:inputText a:type="date" value="#{taskBean.tasks.startDate}">
+		<h:inputText a:type="date" value="#{taskBean.startDate}">
 			<f:convertDateTime pattern="yyyy-MM-dd" />
 		</h:inputText>
 		<h:outputLabel value="Expected End Date"></h:outputLabel>
-		<h:inputText a:type="date" value="#{taskBean.tasks.expectedEndDate}">
+		<h:inputText a:type="date" value="#{taskBean.expectedEndDate}">
 			<f:convertDateTime pattern="yyyy-MM-dd" />
 		</h:inputText>
 		<h:outputLabel value="Types"></h:outputLabel>
-		<h:selectOneMenu value="#{taskBean.tasks.typeId}">
+		<h:selectOneMenu value="#{taskBean.typeId}">
 			<f:selectItems value="#{taskBean.types}" var="type"
 				itemLabel="#{type.name}" itemValue="#{type.id}" />
 		</h:selectOneMenu>
 		<h:outputLabel value="Roles"></h:outputLabel>
-		<h:selectOneMenu value="#{taskBean.tasks.roleId}">
+		<h:selectOneMenu value="#{taskBean.roleId}">
 			<f:selectItems value="#{taskBean.roles}" var="role"
 				itemLabel="#{role.name}" itemValue="#{role.id}" />
 		</h:selectOneMenu>
 		<h:outputLabel value="Epics"></h:outputLabel>
-		<h:selectOneMenu value="#{taskBean.tasks.epicId}">
+		<h:selectOneMenu value="#{taskBean.epicId}">
 			<f:selectItems value="#{taskBean.epics}" var="epic"
 				itemLabel="#{epic.name}" itemValue="#{epic.id}" />
 		</h:selectOneMenu>
