@@ -197,13 +197,8 @@ public class TaskBean {
 	}
 
 	public String deleteTaskBySprintId(int id) {
-		/*System.out.println(id);
-		List<Epic> epics = epicDAO.retrieveEpicBySprintId(id);
-		for (int i = 0; i < epics.size(); i++) {
-			System.out.println(epics.get(i).getName());
-		}*/
-		 boolean result=sprintTaskDAO.deleteSprintTaskBySprintId(id);
-		 return "viewSprints";
+		 sprintTaskDAO.deleteSprintTaskBySprintId(id);
+		 return "dashboard";
 	}
 
 	public String getAllTasks() {

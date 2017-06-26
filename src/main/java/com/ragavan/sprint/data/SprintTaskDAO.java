@@ -77,7 +77,7 @@ public class SprintTaskDAO {
 		boolean result = false;
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
-		Query query = session.createQuery("delete from SprintTask where epicId=:id");
+		Query query = session.createSQLQuery("delete from sprint_task where epic_id=:id");
 		query.setParameter("id", id);
 		int rows = query.executeUpdate();
 		transaction.commit();
@@ -127,12 +127,14 @@ public class SprintTaskDAO {
 		boolean result = false;
 		List<Epic> epics = epicDAO.retrieveEpicBySprintId(id);
 
-		for (int i = 0; i < epics.size(); i++) {
-			int epicId = epics.get(i).getId();
+		for (Epic epic : epics) {
+			int epicId = epic.getId();
+			System.out.println(epicId);
 			deleteSprintTaskByEpicId(epicId);
 			epicDAO.deleteEpic(epicId);
 		}
 		sprintDAO.deleteSprint(id);
+
 		return result;
 	}
 

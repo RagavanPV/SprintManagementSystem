@@ -53,7 +53,8 @@ public class EpicDAO {
 		List<Epic> epics = null;
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
-		Query<Epic> query = session.createSQLQuery("SELECT * FROM epics e JOIN sprints s ON e.sprint_id=s.id WHERE e.sprint_id=:sprintid");
+//		Query<Epic> query = session.createSQLQuery("SELECT e.id FROM epics e JOIN sprints s ON e.sprint_id=s.id WHERE e.sprint_id=:sprintid");
+		Query<Epic> query = session.createQuery("FROM Epic where sprintId.id=:sprintid",Epic.class);
 		query.setParameter("sprintid", id);
 		epics = query.list();
 		transaction.commit();
