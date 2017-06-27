@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<head>
+<meta charset="UTF-8" />
+<title>Sprint Management Console</title>
+</head>
+<body>
+	<ui:include src="header.xhtml"></ui:include>
+
+	<div class="container">
+		<h:dataTable styleClass="table" value="#{taskBean.sprintTask}"
+			var="sprintTask">
+			<h:column>
+				<f:facet name="header">Epic Name</f:facet>    				
+    #{sprintTask.epicId.name}
+   </h:column>
+			<h:column>
+				<f:facet name="header">Task Name</f:facet>    				
+    #{sprintTask.typeDetailId.name}
+   </h:column>
+			<h:column>
+				<f:facet name="header">Description</f:facet>    				
+    #{sprintTask.typeDetailId.description}
+   </h:column>
+		</h:dataTable>
+	</div>
+
+</body>
+</html>

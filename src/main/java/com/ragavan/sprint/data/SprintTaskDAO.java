@@ -9,13 +9,17 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ragavan.sprint.domains.Epic;
 import com.ragavan.sprint.domains.SprintTask;
-import com.ragavan.sprint.domains.TypeDetail;
 
 @Repository
 public class SprintTaskDAO {
 	@Autowired
 	SessionFactory sessionFactory;
+	@Autowired
+	EpicDAO epicDAO;
+	@Autowired
+	SprintDAO sprintDAO;
 
 	public List<SprintTask> retrieveAllSprintTasks() {
 		List<SprintTask> sprintTask = null;
@@ -28,7 +32,19 @@ public class SprintTaskDAO {
 		return sprintTask;
 	}
 
-	public SprintTask retrieveSprintTaskById(int id) {
+	public List<SprintTask> retrieveSprintTaskById(int id) {
+		List<SprintTask> sprintTask = null;
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query<SprintTask> query = session.createQuery("from SprintTask where epicId.sprintId.id=:id", SprintTask.class);
+		query.setParameter("id", id);
+		sprintTask = query.list();
+		transaction.commit();
+		session.close();
+		return sprintTask;
+	}
+
+	public SprintTask retrieveSprintTaskBySprintId(int id) {
 		SprintTask sprintTask = null;
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
@@ -45,6 +61,23 @@ public class SprintTaskDAO {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		Query query = session.createQuery("delete from SprintTask where id=:id");
+		query.setParameter("id", id);
+		int rows = query.executeUpdate();
+		transaction.commit();
+		session.close();
+		if (rows > 0) {
+			result = true;
+		} else {
+			result = false;
+		}
+		return result;
+	}
+
+	public boolean deleteSprintTaskByEpicId(int id) {
+		boolean result = false;
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery("delete from SprintTask where epicId=:id");
 		query.setParameter("id", id);
 		int rows = query.executeUpdate();
 		transaction.commit();
@@ -75,6 +108,31 @@ public class SprintTaskDAO {
 		} else {
 			result = false;
 		}
+		return result;
+	}
+
+	public List<SprintTask> retrieveTasksByRole(int id) {
+		List<SprintTask> sprintTask = null;
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query<SprintTask> query = session.createQuery("from SprintTask where roleId.id=:id", SprintTask.class);
+		query.setParameter("id", id);
+		sprintTask = query.list();
+		transaction.commit();
+		session.close();
+		return sprintTask;
+	}
+
+	public boolean deleteSprintTaskBySprintId(int id) {
+		boolean result = false;
+		List<Epic> epics = epicDAO.retrieveEpicBySprintId(id);
+
+		for (int i = 0; i < epics.size(); i++) {
+			int epicId = epics.get(i).getId();
+			deleteSprintTaskByEpicId(epicId);
+			epicDAO.deleteEpic(epicId);
+		}
+		sprintDAO.deleteSprint(id);
 		return result;
 	}
 

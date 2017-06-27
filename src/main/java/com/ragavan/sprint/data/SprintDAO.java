@@ -44,16 +44,9 @@ public class SprintDAO {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		Query query = session
-				.createQuery("UPDATE Sprint SET NAME=:n, CODE=:c,START_DATE=:startDate,EXPECTED_END_DATE=:expEndDate,"
-						+ "END_DATE=:endDate,TYPE_ID=:TYPEId WHERE id=:id");
+				.createQuery("UPDATE Sprint SET NAME=:n, CODE=:c WHERE id=:id");
 		query.setParameter("c", sprint.getCode());
 		query.setParameter("n", sprint.getName());
-		query.setParameter("startDate", sprint.getStartDate());
-		query.setParameter("endDate", sprint.getEndDate());
-		/*
-		 * query.setParameter("expEndDate", sprint.getExpectedEndDate());
-		 * query.setParameter("typeId", sprint.getTypeId());
-		 */
 		query.setParameter("id", sprint.getId());
 		int rows = query.executeUpdate();
 		transaction.commit();

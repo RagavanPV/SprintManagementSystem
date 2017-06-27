@@ -39,6 +39,16 @@ public class Epic implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "sprint_id")
 	private Sprint sprintId;
+	@Column(name="IS_ACTIVE")
+	private boolean isActive;
+
+	public boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(boolean isActive) {
+		this.isActive = isActive;
+	}
 
 	/**************** Getters and Setters ********************/
 	public int getId() {

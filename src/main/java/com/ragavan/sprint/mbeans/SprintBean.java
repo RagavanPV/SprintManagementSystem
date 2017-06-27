@@ -19,6 +19,7 @@ public class SprintBean {
 	SprintDAO dao;
 	
 	private List<Sprint> sprints;
+	private Sprint sprint;
 	private String name;
 	private String code;
 	private Date startDate;
@@ -69,5 +70,34 @@ public class SprintBean {
 //		System.out.println(sqlDate);
 		dao.addSprint(sprint);
 		return "dashboard";
+	}
+	public String deleteSprint() {
+
+		boolean result = dao.deleteSprint(getId());
+		return "viewSprints";
+	}
+
+	public String updateSprintById(int id){
+		sprint = dao.retrieveSprintById(id);
+		return "editSprints";
+	}
+	public String updateSprint() {
+		boolean result = dao.updateSprintById(sprint);
+		return "viewSprints";
+	}
+
+	public String getAllSprints() {
+		sprints = dao.retrieveAllSprints();
+		return "viewSprints";
+	}
+	public String getSprintById(int id) {
+		sprint = dao.retrieveSprintById(id);
+		return "sprintTask";
+	}
+	public Sprint getSprint() {
+		return sprint;
+	}
+	public void setSprint(Sprint sprint) {
+		this.sprint = sprint;
 	}
 }

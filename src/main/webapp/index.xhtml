@@ -7,6 +7,9 @@
 <head>
 <meta charset="UTF-8" />
 <title>Sprint Management Console</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	crossorigin="anonymous"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -24,7 +27,7 @@
 <body>
 	<h2>Welcome to Sprint Management System</h2>
 	<div class="container-fluid col-md-6">
-		<div class="panel panel-default">
+		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<h3 class="panel-title">Login</h3>
 			</div>
@@ -41,14 +44,17 @@
 					<div class="form-group">
 						<label for="exampleInputPassword1">Password</label>
 						<h:inputSecret id="password" styleClass="form-control"
-							required="true" value="#{loginBean.password}"></h:inputSecret>
-							<h:message for="password" errorClass="err" warnClass="warn"
+							required="true" requiredMessage="Please enter the password"
+							value="#{loginBean.password}"></h:inputSecret>
+						<h:message for="password" errorClass="err" warnClass="warn"
 							infoClass="info"></h:message>
 					</div>
 					<h:commandButton styleClass="btn btn-default"
 						action="#{loginBean.login}" value="Login">
 					</h:commandButton>
-					<h:messages id="message" />
+					<h:outputText id="msgId"></h:outputText>
+					<h:message for="msgId" errorClass="err" warnClass="warn"
+						infoClass="info"></h:message>
 				</h:form>
 			</div>
 		</div>

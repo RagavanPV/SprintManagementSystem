@@ -76,4 +76,29 @@ public class TypeDetailDAO {
 		session.close();
 		return typeDetail;
 	}
+
+	public boolean updateActivationById(int id, boolean active) {
+		boolean result = false;
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		javax.persistence.Query query = null;
+		if (active) {
+			query = session.createQuery("UPDATE TypeDetail SET IS_ACTIVE=:active WHERE id=:id");
+			query.setParameter("active", false);
+			query.setParameter("id", id);
+		} else {
+			query = session.createQuery("UPDATE TypeDetail SET IS_ACTIVE=:active WHERE id=:id");
+			query.setParameter("active", true);
+			query.setParameter("id", id);
+		}
+		int rows = query.executeUpdate();
+		transaction.commit();
+		session.close();
+		if (rows > 0) {
+			result = true;
+		} else {
+			result = false;
+		}
+		return result;
+	}
 }

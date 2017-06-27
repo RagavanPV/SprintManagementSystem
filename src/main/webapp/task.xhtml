@@ -25,11 +25,8 @@
 		<h:inputText a:type="date" value="#{taskBean.expectedEndDate}">
 			<f:convertDateTime pattern="yyyy-MM-dd" />
 		</h:inputText>
-		<h:outputLabel value="Types"></h:outputLabel>
-		<h:selectOneMenu value="#{taskBean.typeId}">
-			<f:selectItems value="#{taskBean.types}" var="type"
-				itemLabel="#{type.name}" itemValue="#{type.id}" />
-		</h:selectOneMenu>
+		
+
 		<h:outputLabel value="Roles"></h:outputLabel>
 		<h:selectOneMenu value="#{taskBean.roleId}">
 			<f:selectItems value="#{taskBean.roles}" var="role"
@@ -42,6 +39,22 @@
 		</h:selectOneMenu>
 		<h:commandButton action="#{taskBean.addTask}" value="Submit"></h:commandButton>
 	</h:form>
+	 <h:dataTable styleClass="table"
+		rendered="#{userSession.roleId.id eq 3 or userSession.roleId.id eq 2}"
+		value="#{taskBean.sprintTask}" var="tasks">
+		<h:column>
+			<f:facet name="header">Epic Name</f:facet>    				
+      #{tasks.epicId.name}
+   </h:column>
+		<h:column>
+			<f:facet name="header">Task Name</f:facet>    				
+      #{tasks.typeDetailId.name}
+   </h:column>
+		<h:column>
+			<f:facet name="header">Description</f:facet>    				
+      #{tasks.typeDetailId.description}
+   </h:column>
+	</h:dataTable>
 
 
 </body>

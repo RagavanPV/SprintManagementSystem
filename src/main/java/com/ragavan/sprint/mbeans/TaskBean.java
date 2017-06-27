@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,6 +21,7 @@ import com.ragavan.sprint.domains.SeedRole;
 import com.ragavan.sprint.domains.SprintTask;
 import com.ragavan.sprint.domains.Type;
 import com.ragavan.sprint.domains.TypeDetail;
+import com.ragavan.sprint.domains.User;
 
 @Component
 @RequestScoped
@@ -46,6 +49,7 @@ public class TaskBean {
 	private int typeId;
 	private int epicId;
 	private int roleId;
+	private List<SprintTask> sprintTask;
 
 	public String getName() {
 		return name;
@@ -139,6 +143,14 @@ public class TaskBean {
 	}
 
 	public String addTask() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) context.getExternalContext().getSession(true);
+		User u = (User) session.getAttribute("userSession");
+		if (u.getRoleId().getId() == 2) {
+			setTypeId(1);
+		} else if (u.getRoleId().getId() == 3) {
+			setTypeId(2);
+		}
 		TypeDetail typeDetail = new TypeDetail();
 		typeDetail.setName(getName());
 		typeDetail.setDescription(getDescription());
@@ -168,5 +180,53 @@ public class TaskBean {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public String getTasksByRole(int id) {
+
+		System.out.println(id);
+		setSprintTask(sprintTaskDAO.retrieveTasksByRole(id));
+		return "task";
+	}
+
+	public String getTaskBySprintId(int id) {
+
+		System.out.println(id);
+		sprintTask = sprintTaskDAO.retrieveSprintTaskById(id);
+		return "sprintTask";
+	}
+
+	public String deleteTaskBySprintId(int id) {
+		/*System.out.println(id);
+		List<Epic> epics = epicDAO.retrieveEpicBySprintId(id);
+		for (int i = 0; i < epics.size(); i++) {
+			System.out.println(epics.get(i).getName());
+		}*/
+		 boolean result=sprintTaskDAO.deleteSprintTaskBySprintId(id);
+		 return "viewSprints";
+	}
+
+	public String getAllTasks() {
+
+		setSprintTask(sprintTaskDAO.retrieveAllSprintTasks());
+		return "viewSprints?faces-redirect=true";
+	}
+
+	public List<SprintTask> getSprintTask() {
+		return sprintTask;
+	}
+
+	public void setSprintTask(List<SprintTask> sprintTask) {
+		this.sprintTask = sprintTask;
+	}
+
+	private String toggleActivation(int id, boolean active) {
+		System.out.println("abc");
+		if (typeDetailDAO.updateActivationById(id, active)) {
+			return "viewSprints";
+		} else {
+			return null;
+		}
+
 	}
 }

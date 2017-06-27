@@ -30,7 +30,16 @@ public class Sprint implements Serializable {
 
 	@Column(name = "end_date")
 	private Date endDate;
+	@Column(name = "IS_ACTIVE")
+	private boolean isActive;
 
+	public boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(boolean isActive) {
+		this.isActive = isActive;
+	}
 
 	/****************** Getters and Setters *******************/
 	public int getId() {
@@ -73,5 +82,4 @@ public class Sprint implements Serializable {
 		this.endDate = endDate;
 	}
 
-	
 }

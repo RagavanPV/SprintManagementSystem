@@ -39,22 +39,27 @@ public class LoginBean {
 
 	public String login() {
 		User u;
-		String url = "index?faces-redirect=true";
+		//String url = "index?faces-redirect=true";
 		try {
 			u = user.retrieveUserByEmail(getEmail());
 			if (u.getPassword().equals(getPassword())) {
 				FacesContext context = FacesContext.getCurrentInstance();
 				HttpSession session = (HttpSession) context.getExternalContext().getSession(true);
 				session.setAttribute("userSession", u);
-				url = "dashboard?faces-redirect=true";
+				return "dashboard?faces-redirect=true";
+			}
+			else{
+				String errorMessage = "Invalid Login";
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, errorMessage);
+				FacesContext.getCurrentInstance().addMessage("form:msgId", message);
 			}
 		} catch (DataAccessException e) {
-			e.printStackTrace();
+			String errorMessage = "Invalid Email";
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, errorMessage);
+			FacesContext.getCurrentInstance().addMessage("form:email", message);
 		}
-		String errorMessage = "Invalid Login";
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, errorMessage);
-		FacesContext.getCurrentInstance().addMessage("form:email", message);
-		return url;
+
+		return null;
 	}
 
 	public String logout() {

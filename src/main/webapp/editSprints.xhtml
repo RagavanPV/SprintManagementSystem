@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<head>
+<meta charset="UTF-8" />
+<title>Sprint Management Console</title>
+
+</head>
+<body>
+	<ui:include src="header.xhtml"></ui:include>
+
+	<h:form>
+		<h:outputText value="Name"></h:outputText>
+		<h:inputText value="#{sprintBean.sprint.name}"></h:inputText>
+		<h:outputText value="Code"></h:outputText>
+		<h:inputText value="#{sprintBean.sprint.code}"></h:inputText>
+		<h:inputHidden value="#{sprintBean.sprint.id}"></h:inputHidden>
+		<h:commandButton action="#{sprintBean.updateSprint}"
+			value="Submit"></h:commandButton>
+	</h:form>
+
+
+</body>
+</html>

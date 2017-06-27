@@ -10,13 +10,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ragavan.sprint.domains.Epic;
-import com.ragavan.sprint.domains.Sprint;
 
 @Repository
 public class EpicDAO {
 
 	@Autowired
-	SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
+	
+
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 
 	public List<Epic> retrieveAllEpics() {
 		List<Epic> epics = null;
@@ -39,6 +47,18 @@ public class EpicDAO {
 		transaction.commit();
 		session.close();
 		return epic;
+	}
+
+	public List<Epic> retrieveEpicBySprintId(int id) {
+		List<Epic> epics = null;
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query<Epic> query = session.createSQLQuery("SELECT * FROM epics e JOIN sprints s ON e.sprint_id=s.id WHERE e.sprint_id=:sprintid");
+		query.setParameter("sprintid", id);
+		epics = query.list();
+		transaction.commit();
+		session.close();
+		return epics;
 	}
 
 	public boolean updateEpic(Epic epic) {
@@ -82,6 +102,7 @@ public class EpicDAO {
 		}
 		return result;
 	}
+
 	public boolean addEpics(Epic epic) {
 		boolean result = false;
 		Session session = sessionFactory.openSession();

@@ -12,10 +12,25 @@
 	<ui:include src="header.xhtml"></ui:include>
 
 	<h:form>
-		<h:commandButton action="level.xhtml" value="Add Levels"></h:commandButton>
-		<h:commandButton action="sprint.xhtml" value="Create New Sprint"></h:commandButton>
-		<h:commandButton action="epic.xhtml" value="Create New Epic"></h:commandButton>
-		<h:commandButton action="task.xhtml" value="Create New Task"></h:commandButton>
+		<h:commandButton rendered="#{userSession.roleId.id eq 1}"
+			action="level.xhtml" value="Add Levels"></h:commandButton>
+		<h:commandButton rendered="#{userSession.roleId.id eq 1}"
+			action="sprint.xhtml" value="Create New Sprint"></h:commandButton>
+		<h:commandButton rendered="#{userSession.roleId.id eq 1}"
+			action="#{sprintBean.getAllSprints}" value="View Sprints"></h:commandButton>
+		<h:commandButton rendered="#{userSession.roleId.id eq 4}"
+			action="epic.xhtml" value="Create New Epic"></h:commandButton>
+		<h:commandButton rendered="#{userSession.roleId.id eq 2}"
+			action="task.xhtml" value="Create New Task"></h:commandButton>
+		<h:commandButton rendered="#{userSession.roleId.id eq 3}"
+			action="task.xhtml" value="Create New Bug"></h:commandButton>
+		<!-- <h:commandButton
+			rendered="#{userSession.roleId.id eq 2 or userSession.roleId.id eq 3 }"
+			action="#{taskBean.getTasksByRole(userSession.roleId.id)}"
+			value="View Task"></h:commandButton> -->
 	</h:form>
+
+	<h:dataTable rendered="#{userSession.roleId.id eq 1}"></h:dataTable>
+
 </body>
 </html>

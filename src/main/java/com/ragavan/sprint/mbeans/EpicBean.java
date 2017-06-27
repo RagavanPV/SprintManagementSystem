@@ -123,8 +123,6 @@ public class EpicBean {
 		Sprint s = new Sprint();
 		s.setId(getSprintId());
 		epics.setSprintId(s);
-		System.out.println(epics.getCode() + " " + epics.getName() + " " + epics.getExpectedEndDate()+" "+epics.getStartDate()+" "+epics.getSprintId().getId());
-		// System.out.println(sqlDate);
 		dao.addEpics(epics);
 		return "dashboard";
 	}

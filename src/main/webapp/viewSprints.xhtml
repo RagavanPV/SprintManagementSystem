@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<head>
+<meta charset="UTF-8" />
+<title>Sprint Management Console</title>
+
+</head>
+<body>
+	<ui:include src="header.xhtml"></ui:include>
+
+	<div class="container">
+		<h:dataTable styleClass="table"
+			rendered="#{userSession.roleId.id eq 1}"
+			value="#{sprintBean.sprints}" var="sprint">
+			<h:column>
+				<f:facet name="header">Sprint Name</f:facet>    				
+     <h:form><h:commandLink action="#{taskBean.getTaskBySprintId(sprint.id)}" value="#{sprint.name}"></h:commandLink></h:form> 
+   </h:column>
+			<h:column>
+				<f:facet name="header">Code</f:facet>    				
+      #{sprint.code}
+   </h:column>
+			
+			<h:column>
+				<f:facet name="header">Status</f:facet>
+				<h:form>
+					<h:commandButton styleClass="btn btn-success btn-xs"
+						value="Active" rendered="#{sprint.isActive}"></h:commandButton>
+					<h:commandButton styleClass="btn btn-danger btn-xs"
+						value="InActive" rendered="#{!sprint.isActive}"></h:commandButton>
+				</h:form>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Actions</f:facet>
+				<h:form>
+					<h:commandLink action="#{sprintBean.updateSprintById(sprint.id)}" styleClass="glyphicon glyphicon-pencil"></h:commandLink>
+
+					<h:commandLink action="#{taskBean.deleteTaskBySprintId(sprint.id)}" styleClass="glyphicon glyphicon-trash"></h:commandLink>
+				</h:form>
+			</h:column>
+		</h:dataTable>
+	</div>
+
+</body>
+</html>
